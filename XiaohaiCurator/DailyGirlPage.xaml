@@ -1,0 +1,69 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="XiaohaiCurator.DailyGirlPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="{Binding IsLoading}">
+
+  <shell:SystemTray.ProgressIndicator>
+    <shell:ProgressIndicator Text="{Binding Path=LocalizedResources.LoadingText, Source={StaticResource LocalizedStrings}}"
+                             IsIndeterminate="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
+  </shell:SystemTray.ProgressIndicator>
+  
+  <phone:PhoneApplicationPage.Resources>
+    <DataTemplate x:Key="TiledImagesTemplate">
+      <StackPanel Height="144" Width="144" Margin="6, 6">
+        <Image Width="144" Height="144" Stretch="UniformToFill" CacheMode="BitMapCache">
+          <Image.Source>
+            <BitmapImage UriSource="{Binding ThumbnailUrl}" CreateOptions="BackgroundCreation" />
+          </Image.Source>
+        </Image>
+      </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="GirlOfTodayItemTemplate">
+      <StackPanel Margin="6,6">
+        <Image CacheMode="BitMapCache">
+          <Image.Source>
+            <BitmapImage UriSource="{Binding ThumbnailUrl}" CreateOptions="BackgroundCreation" />
+          </Image.Source>
+        </Image>
+      </StackPanel>
+    </DataTemplate>
+    
+  </phone:PhoneApplicationPage.Resources>
+  
+  <!--LayoutRoot 是放置所有頁面的根資料格-->
+  <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid Margin="6,12,0,0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      
+      <StackPanel Grid.Row="0">
+        <TextBlock Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
+                   Margin="12"
+                   FontSize="24"
+                   FontWeight="SemiBold"/>
+        <TextBlock x:Name="Name" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+        <TextBlock x:Name="Day" Style="{StaticResource PhoneTextSubtleStyle}" />
+      </StackPanel>
+      
+      <phone:LongListSelector x:Name="GirlOfTodayList" Grid.Row="1" Margin="12,6,0,0"
+                              ItemsSource="{Binding GirlOfToday}"
+                              ItemTemplate="{StaticResource TiledImagesTemplate}"
+                              LayoutMode="Grid"
+                              GridCellSize="144, 144"
+                              SelectionChanged="LongListSelector_SelectionChanged"/>
+    </Grid>
+  </Grid>
+
+</phone:PhoneApplicationPage>

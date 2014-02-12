@@ -1,0 +1,16 @@
+﻿<vm:MainViewModel
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:vm="clr-namespace:XiaohaiCurator.ViewModels">
+
+  <vm:MainViewModel.GirlsStream>
+    <vm:GirlViewModel Name="寧寧（Ning）" ThumbnailUrl="http://t.curator.im/sMnHpsvgO_cB462SLkttR1xMTzI=/250x0/media.curator.im/images/417497515023618/480742155365820_1779914_480742155365820_1446075196_n.jpg" />
+    <vm:GirlViewModel Name="韓欣" ThumbnailUrl="http://t.curator.im/gKMPSWpJ-hwnqS4WOA8mZd-cJN4=/250x0/media.curator.im/images/612507322103696/688494827838278_1902087_688494827838278_382365224_n.jpg" />
+    <vm:GirlViewModel Name="鍾小八粉絲團" ThumbnailUrl="http://t.curator.im/KeKjOsRO6X6mn9AKWni-eMSWmFU=/250x0/media.curator.im/images/118838948169637/612161788837348_1798637_612161788837348_556178304_n.jpg" />
+    <vm:GirlViewModel Name="【Eli。倪倪】" ThumbnailUrl="http://t.curator.im/bms0RiA_fpsiqCmTNgUhn-1HpPw=/250x0/media.curator.im/images/547248902004754/640787545984222_1601575_640787545984222_1963186929_n.jpg" />
+    <vm:GirlViewModel Name="李元玲 Cathryn Lee" ThumbnailUrl="http://t.curator.im/Hnt3uWYh5ULMlcxe_3mkcQmELQk=/250x0/media.curator.im/images/193467924097776/494551977322701_1796502_494551977322701_876807031_n.jpg" />
+    <vm:GirlViewModel Name="Love+ 咪兔 Mi Two" ThumbnailUrl="http://t.curator.im/t8wpxkAymuubjr0_Z55Z5Qi8ddw=/250x0/media.curator.im/images/425748887508373/575190189230908_1743709_575190189230908_729958612_n.jpg" />
+    <vm:GirlViewModel Name="Remin-高敏敏" ThumbnailUrl="http://t.curator.im/ZkGTfv23sWC7gxOS52BCHkYs6UQ=/250x0/media.curator.im/images/325532504215723/455724954529810_1794806_455724954529810_2142192545_n.jpg" />
+  </vm:MainViewModel.GirlsStream>
+
+</vm:MainViewModel>

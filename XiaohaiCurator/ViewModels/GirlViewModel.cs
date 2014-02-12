@@ -1,0 +1,81 @@
+﻿
+using System;
+namespace XiaohaiCurator.ViewModels
+{
+  public class GirlViewModel : BaseViewModel
+  {
+    private string _name;
+    /// <summary>
+    /// The name of the daily girl.
+    /// </summary>
+    public string Name
+    {
+      get 
+      {
+        return _name;
+      }
+      set
+      {
+        if (value != _name)
+        {
+          _name = value;
+          NotifyPropertyChanged("Name");
+        }
+      }
+    }
+
+    private Uri _thumbnailUrl;
+    /// <summary>
+    /// 
+    /// </summary>
+    public Uri ThumbnailUrl
+    {
+      get 
+      { 
+        return _thumbnailUrl; 
+      }
+      set
+      {
+        if (value != _thumbnailUrl)
+        {
+          _thumbnailUrl = value;
+          NotifyPropertyChanged("ThumbnailUrl");
+        }
+      }
+    }
+
+    private Uri _imageUrl;
+    public Uri ImageUrl
+    {
+      get
+      {
+        return _imageUrl;
+      }
+      set
+      {
+        if (value != _imageUrl)
+        {
+          _imageUrl = value;
+          NotifyPropertyChanged("ImageUrl");
+        }
+      }
+    }
+
+    private string _dateAt;
+    public string DateAt
+    {
+      get
+      {
+        return _dateAt;
+      }
+      set
+      {
+        if (value != _dateAt)
+        {
+          _dateAt = value;
+          NotifyPropertyChanged("DateAt");
+        }
+      }
+    }
+  }
+}
