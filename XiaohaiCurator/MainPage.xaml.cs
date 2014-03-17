@@ -8,6 +8,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Scheduler;
 using XiaohaiCurator.Resources;
 using XiaohaiCurator.ViewModels;
+using Microsoft.Phone.Shell;
+using System.Windows;
 
 namespace XiaohaiCurator
 {
@@ -20,6 +22,15 @@ namespace XiaohaiCurator
 
     private const int magicOffset = 9;
 
+    private int currentPivotIndex = 0;
+    private int layoutStatus = 0;
+
+    // layout button
+    private ApplicationBarIconButton layoutButton;
+
+    // pointer to current displayed list
+    private LongListSelector focusedList;
+
     // Constructor
     public MainPage()
     {
@@ -27,6 +38,9 @@ namespace XiaohaiCurator
 
       // try to start the background agent.
       StartPeriodicAgent();
+
+      // Init localized app bar
+      BuildLocalizedApplicationBar();
 
       // Set the data context of the listbox control to the sample data
       DataContext = App.ViewModel;
@@ -49,6 +63,46 @@ namespace XiaohaiCurator
           }
         }
       }
+    }
+
+    /// <summary>
+    /// Build localized app bar for the main page.
+    /// </summary>
+    private void BuildLocalizedApplicationBar()
+    {
+      ApplicationBar = new ApplicationBar();
+
+      // create the layout button
+      layoutButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/layout.list.png", UriKind.Relative)) 
+        { 
+          Text = AppResources.LayoutButtonListText
+        };
+      layoutButton.Click += (s, e) =>
+        {
+          if (currentPivotIndex == 0)
+          {
+            layoutStatus += (layoutStatus & 1) == 0 ? 1 : -1;
+          }
+          else
+          {
+            layoutStatus += (layoutStatus & 1) == 0 ? 2 : -2;
+          }
+
+          if (layoutButton.Text == AppResources.LayoutButtonListText)
+          {
+            ToggleLayoutButton(1);
+            focusedList.LayoutMode = LongListSelectorLayoutMode.List;
+            focusedList.ItemTemplate = Resources["ListImagesTemplate"] as DataTemplate;
+          }
+          else
+          {
+            ToggleLayoutButton(0);
+            focusedList.LayoutMode = LongListSelectorLayoutMode.Grid;
+            focusedList.ItemTemplate = Resources["TiledImagesTemplate"] as DataTemplate;
+          }
+        };
+
+      ApplicationBar.Buttons.Add(layoutButton);
     }
 
     /// <summary>
@@ -102,11 +156,44 @@ namespace XiaohaiCurator
 
     private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-      // load girl stream if the stream has not been loaded.
-      if (MainPivot.SelectedIndex == 1 && !isStreamLoaded)
+      currentPivotIndex = MainPivot.SelectedIndex;
+
+      if (currentPivotIndex == 0)
       {
-        App.ViewModel.LoadStream(++page);
-        isStreamLoaded = true;
+        focusedList = DailyGirlsList;
+
+        ToggleLayoutButton(layoutStatus & 1);
+      }
+      else if (currentPivotIndex == 1)
+      {
+        focusedList = GirlsStreamList;
+
+        ToggleLayoutButton((layoutStatus >> 1) & 1);
+
+        // load girl stream if the stream has not been loaded.
+        if (!isStreamLoaded)
+        {
+          App.ViewModel.LoadStream(++page);
+          isStreamLoaded = true;
+        }
+      }
+    }
+
+    /// <summary>
+    /// Switch Layout Button from List (0) to Grid (1)
+    /// </summary>
+    /// <param name="mode">Layout mode. 0 for list; 1 for grid.</param>
+    private void ToggleLayoutButton(int mode)
+    {
+      if (mode == 0)
+      {
+        layoutButton.IconUri = new Uri("/Assets/AppBar/layout.list.png", UriKind.Relative);
+        layoutButton.Text = AppResources.LayoutButtonListText;
+      }
+      else
+      {
+        layoutButton.IconUri = new Uri("/Assets/AppBar/layout.grid.png", UriKind.Relative);
+        layoutButton.Text = AppResources.LayoutButtonGridText;
       }
     }
 

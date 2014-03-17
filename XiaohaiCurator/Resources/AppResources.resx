@@ -143,4 +143,10 @@
   <data name="LoadingDailyText" xml:space="preserve">
     <value>Loading Girl-of-Today ...</value>
   </data>
+  <data name="LayoutButtonGridText" xml:space="preserve">
+    <value>Thumbnail</value>
+  </data>
+  <data name="LayoutButtonListText" xml:space="preserve">
+    <value>Detail</value>
+  </data>
 </root>

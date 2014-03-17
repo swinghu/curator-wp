@@ -143,4 +143,10 @@
   <data name="LoadingDailyText" xml:space="preserve">
     <value>更新今日正妹中...</value>
   </data>
+  <data name="LayoutButtonGridText" xml:space="preserve">
+    <value>縮圖</value>
+  </data>
+  <data name="LayoutButtonListText" xml:space="preserve">
+    <value>詳細資料</value>
+  </data>
 </root>
