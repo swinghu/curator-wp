@@ -33,6 +33,8 @@ namespace XiaohaiCurator
         Day.Text = day;
         App.ViewModel.LoadGirlOfDay(day);
       }
+
+      base.OnNavigatedTo(e);
     }
 
     private void LongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)

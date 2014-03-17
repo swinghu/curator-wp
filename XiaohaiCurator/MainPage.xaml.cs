@@ -152,6 +152,8 @@ namespace XiaohaiCurator
       {
         App.ViewModel.LoadData();
       }
+
+      base.OnNavigatedTo(e);
     }
 
     private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
