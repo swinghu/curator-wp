@@ -85,7 +85,7 @@ namespace XiaohaiCurator
           }
           else
           {
-            layoutStatus += (layoutStatus & 1) == 0 ? 2 : -2;
+            layoutStatus += ((layoutStatus >> 1) & 1) == 0 ? 2 : -2;
           }
 
           if (layoutButton.Text == AppResources.LayoutButtonListText)
