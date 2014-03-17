@@ -24,7 +24,12 @@
 
   * [nuget](http://nuget.codeplex.com/) 套件
 
-    由於本專案使用了 [Json.NET](http://james.newtonking.com/json)，並且使用 nuget 作套件管理，編譯前需使用此工具來安裝 Json.NET 套件。
+    由於本專案使用了 
+	
+	- [Json.NET](http://james.newtonking.com/json)
+	- [Windows Phone Toolkit](http://phone.codeplex.com/)
+	
+	並且使用 nuget 作套件管理，編譯前需使用此工具來安裝上述套件。
 
 ## 其它
 
