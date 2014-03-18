@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0">
+  
+  <!-- 正體中文的語音命令 -->
+  <CommandSet xml:lang="zh-tw">
+    <CommandPrefix> 小海 </CommandPrefix>
+    <Example> 顯示一天一妹或是正妹流 </Example>
+    <Command Name="showStream">
+      <Example> 顯示小海嚴選列表 </Example>
+      <ListenFor> [嚴選] {streamType} </ListenFor>
+      <Feedback> 正在開啟小海嚴選 {streamType} </Feedback>
+      <Navigate Target="/MainPage.xaml" />
+    </Command>
+
+    <PhraseList Label="streamType">
+      <Item> 一天一咩 </Item>
+      <Item> 正咩流 </Item>
+    </PhraseList>
+  </CommandSet>
+
+</VoiceCommands>

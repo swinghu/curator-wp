@@ -10,6 +10,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using XiaohaiCurator.Resources;
 using XiaohaiCurator.ViewModels;
+using Windows.ApplicationModel;
+using Windows.Phone.Speech.VoiceCommands;
 
 namespace XiaohaiCurator
 {
@@ -76,6 +78,8 @@ namespace XiaohaiCurator
         PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
       }
 
+      // Initialize the voice commands
+      InitializeVoiceCommands();
     }
 
     // Code to execute when the application is launching (eg, from Start)
@@ -244,6 +248,22 @@ namespace XiaohaiCurator
         }
 
         throw;
+      }
+    }
+
+    private async static void InitializeVoiceCommands()
+    {
+      var filename = "SupportedVoiceCommands.xml";
+
+      try
+      {
+        var location = Package.Current.InstalledLocation.Path;
+        var fileUriString = String.Format("file://{0}/{1}", location, filename);
+        await VoiceCommandService.InstallCommandSetsFromFileAsync(new Uri(fileUriString));
+      }
+      catch (Exception ex)
+      {
+        Debug.WriteLine(ex.Message);
       }
     }
   }

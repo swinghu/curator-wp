@@ -146,6 +146,7 @@
     </Content>
     <Content Include="Assets\AppBar\download.png" />
     <Content Include="Assets\AppBar\favs.png" />
+    <Content Include="SupportedVoiceCommands.xml" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />

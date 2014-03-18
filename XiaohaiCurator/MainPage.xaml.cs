@@ -153,6 +153,16 @@ namespace XiaohaiCurator
         App.ViewModel.LoadData();
       }
 
+      if (NavigationContext.QueryString.ContainsKey("streamType"))
+      {
+        string streamType = NavigationContext.QueryString["streamType"];
+        Debug.WriteLine(streamType);
+        if (streamType.Equals("正咩流"))
+        {
+          MainPivot.SelectedIndex = 1;
+        }
+      }
+
       base.OnNavigatedTo(e);
     }
 
