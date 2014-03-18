@@ -149,4 +149,16 @@
   <data name="LayoutButtonListText" xml:space="preserve">
     <value>詳細資料</value>
   </data>
+  <data name="LockscreenButtonText" xml:space="preserve">
+    <value>設為鎖定畫面</value>
+  </data>
+  <data name="SaveButtonText" xml:space="preserve">
+    <value>儲存圖片</value>
+  </data>
+  <data name="SavePictureDoneText" xml:space="preserve">
+    <value>照片已儲存</value>
+  </data>
+  <data name="SetLockScreenDoneText" xml:space="preserve">
+    <value>照片已設為鎖定畫面</value>
+  </data>
 </root>

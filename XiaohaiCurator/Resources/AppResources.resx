@@ -149,4 +149,16 @@
   <data name="LayoutButtonListText" xml:space="preserve">
     <value>Detail</value>
   </data>
+  <data name="LockscreenButtonText" xml:space="preserve">
+    <value>lockscreen</value>
+  </data>
+  <data name="SaveButtonText" xml:space="preserve">
+    <value>save</value>
+  </data>
+  <data name="SavePictureDoneText" xml:space="preserve">
+    <value>Picture is saved.</value>
+  </data>
+  <data name="SetLockScreenDoneText" xml:space="preserve">
+    <value>Picture is set to lockscreen.</value>
+  </data>
 </root>

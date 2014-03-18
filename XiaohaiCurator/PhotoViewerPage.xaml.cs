@@ -1,16 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Net;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using System.Windows.Media.Imaging;
-using System.Diagnostics;
-using System.Collections.ObjectModel;
+using Microsoft.Xna.Framework.Media;
+using XiaohaiCurator.Resources;
 using XiaohaiCurator.ViewModels;
+using Windows.Phone.System.UserProfile;
+using System.IO.IsolatedStorage;
 
 namespace XiaohaiCurator
 {
@@ -21,14 +22,129 @@ namespace XiaohaiCurator
 
     public Uri imageUrl { get; private set; }
 
+    // download/save button
+    private ApplicationBarIconButton saveButton;
+    // set as lockscreen photo
+    private ApplicationBarIconButton lockscreenButton;
+
     public PhotoViewerPage()
     {
       InitializeComponent();
 
       DataContext = this;
+
+      BuildLocalizedApplicationBar();
       
       ImageContainer.ManipulationCompleted += ImageContainer_ManipulationCompleted;
       ImageContainer.ImageOpened += ImageContainer_ImageOpened;
+    }
+
+    /// <summary>
+    /// Build localized app bar for the photo viewer page.
+    /// </summary>
+    private void BuildLocalizedApplicationBar()
+    {
+      ApplicationBar = new ApplicationBar();
+      ApplicationBar.Mode = ApplicationBarMode.Minimized;
+
+      saveButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/download.png", UriKind.Relative)) 
+        { 
+          Text = AppResources.SaveButtonText
+        };
+      saveButton.Click += saveButton_Click;
+
+      lockscreenButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/favs.png", UriKind.Relative)) 
+        {
+          Text = AppResources.LockscreenButtonText
+        };
+      lockscreenButton.Click += lockscreenButton_Click;
+
+      ApplicationBar.Buttons.Add(saveButton);
+      ApplicationBar.Buttons.Add(lockscreenButton);
+    }
+
+    /// <summary>
+    /// Handle the save button is clicked.
+    /// </summary>
+    void saveButton_Click(object sender, EventArgs args)
+    {
+      // retrieve the filename
+      string[] urlString = imageUrl.ToString().Split(new char[] { '/' });
+      var fileName = urlString[urlString.Length - 1];
+
+      // start to download the picture and save it
+      var webClient = new WebClient();
+      webClient.OpenReadCompleted += (s, e) =>
+      {
+        SystemTray.ProgressIndicator.IsVisible = false;
+
+        BitmapImage bitmap = new BitmapImage();
+        bitmap.SetSource(e.Result);
+
+        // save to media library in "saved pictures" album.
+        using (var mediaLibrary = new MediaLibrary())
+        {
+          using (var stream = new MemoryStream())
+          {
+            WriteableBitmap wb = new WriteableBitmap(bitmap);
+            wb.SaveJpeg(stream, wb.PixelWidth, wb.PixelHeight, 0, 100);
+            stream.Seek(0, SeekOrigin.Begin);
+            var picture = mediaLibrary.SavePicture(fileName, stream);
+            if (picture.Name.Contains(fileName))
+            {
+              MessageBox.Show(AppResources.SavePictureDoneText);
+            }
+          }
+        }
+      };
+      webClient.OpenReadAsync(imageUrl);
+      SystemTray.ProgressIndicator.IsVisible = true;
+    }
+
+    /// <summary>
+    /// Handle the lockscreen button is clicked.
+    /// </summary>
+    async void lockscreenButton_Click(object sender, EventArgs args)
+    {
+      if (!LockScreenManager.IsProvidedByCurrentApplication)
+      {
+        await LockScreenManager.RequestAccessAsync();
+      }
+
+      if (LockScreenManager.IsProvidedByCurrentApplication)
+      {
+        // retrieve the filename
+        string[] urlString = imageUrl.ToString().Split(new char[] { '/' });
+        var fileName = urlString[urlString.Length - 1];
+
+        // start to download the picture and save it
+        var webClient = new WebClient();
+        webClient.OpenReadCompleted += (s, e) =>
+        {
+          SystemTray.ProgressIndicator.IsVisible = false;
+
+          BitmapImage bitmap = new BitmapImage();
+          bitmap.SetSource(e.Result);
+
+          using (IsolatedStorageFile file = IsolatedStorageFile.GetUserStoreForApplication())
+          {
+            if (file.FileExists(fileName))
+            {
+              file.DeleteFile(fileName);
+            }
+
+            IsolatedStorageFileStream fileStream = file.CreateFile(fileName);
+            WriteableBitmap wb = new WriteableBitmap(bitmap);
+            System.Windows.Media.Imaging.Extensions.SaveJpeg(wb, fileStream, wb.PixelWidth, wb.PixelHeight, 0, 100);
+            fileStream.Close();
+          }
+
+          LockScreen.SetImageUri(new Uri(string.Format("ms-appdata:///Local/{0}", fileName), UriKind.Absolute));
+          MessageBox.Show(AppResources.SetLockScreenDoneText);
+        };
+        webClient.OpenReadAsync(imageUrl);
+        SystemTray.ProgressIndicator.IsVisible = true;
+      }
     }
 
     void ImageContainer_ImageOpened(object sender, RoutedEventArgs e)
@@ -75,6 +191,7 @@ namespace XiaohaiCurator
     {
       SystemTray.ProgressIndicator.IsVisible = true;
       var item = collection[index];
+      imageUrl = item.ImageUrl;
       BitmapImage bitmap = new BitmapImage(item.ImageUrl);
       ImageContainer.Source = bitmap;
       currentIndex = index;

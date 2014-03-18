@@ -133,6 +133,15 @@ namespace XiaohaiCurator.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to lockscreen.
+        /// </summary>
+        public static string LockscreenButtonText {
+            get {
+                return ResourceManager.GetString("LockscreenButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
         public static string ResourceFlowDirection {
@@ -147,6 +156,33 @@ namespace XiaohaiCurator.Resources {
         public static string ResourceLanguage {
             get {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to save.
+        /// </summary>
+        public static string SaveButtonText {
+            get {
+                return ResourceManager.GetString("SaveButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Picture is saved..
+        /// </summary>
+        public static string SavePictureDoneText {
+            get {
+                return ResourceManager.GetString("SavePictureDoneText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Picture is set to lockscreen..
+        /// </summary>
+        public static string SetLockScreenDoneText {
+            get {
+                return ResourceManager.GetString("SetLockScreenDoneText", resourceCulture);
             }
         }
     }
