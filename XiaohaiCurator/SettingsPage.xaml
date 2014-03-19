@@ -42,7 +42,18 @@
     <!--Pivot Control-->
     <phone:Pivot x:Name="MainPivot"
                  Title="{Binding Path=LocalizedResources.SettingsPageTitle, Source={StaticResource LocalizedStrings}}">
-      <!--Pivot item one-->
+
+      <!-- Pivot item general -->
+      <phone:PivotItem Header="{Binding Path=LocalizedResources.SettingsPageGeneralHeader, Source={StaticResource LocalizedStrings}}">
+        <StackPanel Orientation="Vertical">
+          <TextBlock Text="{Binding Path=LocalizedResources.SettingsPageShareLinkMessageTitle, Source={StaticResource LocalizedStrings}}"
+                     Style="{StaticResource PhoneTextSubtleStyle}"/>
+          <TextBox x:Name="ShareLinkMessage"
+                   Text="{Binding Path=LocalizedResources.SettingsPageShareLinkMessageDefault, Source={StaticResource LocalizedStrings}}" TextChanged="ShareLinkMessage_TextChanged" />
+        </StackPanel>
+      </phone:PivotItem>
+      
+      <!--Pivot item lockscreen -->
       <phone:PivotItem Header="{Binding Path=LocalizedResources.SettingsPageLockScreenHeader, Source={StaticResource LocalizedStrings}}">
         <StackPanel Orientation="Vertical">
           <Button x:Name="LockScreenSettingButton"

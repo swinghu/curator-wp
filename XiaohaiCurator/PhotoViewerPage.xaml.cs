@@ -12,6 +12,7 @@ using XiaohaiCurator.Resources;
 using XiaohaiCurator.ViewModels;
 using Windows.Phone.System.UserProfile;
 using System.IO.IsolatedStorage;
+using Microsoft.Phone.Tasks;
 
 namespace XiaohaiCurator
 {
@@ -19,6 +20,7 @@ namespace XiaohaiCurator
   {
     private ObservableCollection<GirlViewModel> collection;
     private int currentIndex;
+    private IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
 
     public Uri imageUrl { get; private set; }
 
@@ -26,6 +28,8 @@ namespace XiaohaiCurator
     private ApplicationBarIconButton saveButton;
     // set as lockscreen photo
     private ApplicationBarIconButton lockscreenButton;
+    // share button
+    private ApplicationBarIconButton shareButton;
 
     public PhotoViewerPage()
     {
@@ -59,8 +63,38 @@ namespace XiaohaiCurator
         };
       lockscreenButton.Click += lockscreenButton_Click;
 
+      // share the page
+      shareButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/share.png", UriKind.Relative)) 
+        {
+          Text = AppResources.PhotoViewerPageAppBarShare
+        };
+      shareButton.Click += shareButton_Click;
+
       ApplicationBar.Buttons.Add(saveButton);
+      ApplicationBar.Buttons.Add(shareButton);
       ApplicationBar.Buttons.Add(lockscreenButton);
+    }
+
+    /// <summary>
+    /// Handle the share button is clicked.
+    /// </summary>
+    void shareButton_Click(object sender, EventArgs args)
+    {
+      var item = collection[currentIndex];
+
+      ShareLinkTask shareLinkTask = new ShareLinkTask();
+      shareLinkTask.Title = string.Format("小海嚴選 - {0}", item.Name);
+      shareLinkTask.LinkUri = new Uri(string.Format("http://curator.im/item/{0}/", item.Id), UriKind.Absolute);
+      if (appSettings.Contains(Constant.SETTINGS_SHARE_LINK_MESSAGE))
+      {
+        shareLinkTask.Message = (string)appSettings[Constant.SETTINGS_SHARE_LINK_MESSAGE];
+      }
+      else
+      {
+        shareLinkTask.Message = AppResources.SettingsPageShareLinkMessageDefault;
+      }
+
+      shareLinkTask.Show();
     }
 
     /// <summary>

@@ -182,4 +182,16 @@
   <data name="SettingsPageLockScreenPeriodicalSwitchHeader" xml:space="preserve">
     <value>每天自動更新</value>
   </data>
+  <data name="PhotoViewerPageAppBarShare" xml:space="preserve">
+    <value>分享</value>
+  </data>
+  <data name="SettingsPageGeneralHeader" xml:space="preserve">
+    <value>一般</value>
+  </data>
+  <data name="SettingsPageShareLinkMessageTitle" xml:space="preserve">
+    <value>分享頁面訊息</value>
+  </data>
+  <data name="SettingsPageShareLinkMessageDefault" xml:space="preserve">
+    <value>我覺得這個女生很漂亮，相信你也會喜歡！</value>
+  </data>
 </root>

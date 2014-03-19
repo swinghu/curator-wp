@@ -4,6 +4,23 @@ namespace XiaohaiCurator.ViewModels
 {
   public class GirlViewModel : BaseViewModel
   {
+    private string _id;
+    public string Id
+    {
+      get
+      {
+        return _id;
+      }
+      set
+      {
+        if (value != _id)
+        {
+          _id = value;
+          NotifyPropertyChanged("Id");
+        }
+      }
+    }
+
     private string _name;
     /// <summary>
     /// The name of the daily girl.

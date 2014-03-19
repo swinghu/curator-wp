@@ -73,6 +73,8 @@ namespace XiaohaiCurator.ViewModels
 
         this.GirlOfToday.Add(new GirlViewModel() 
         { 
+          Id = (string) image["id"],
+          Name = (string) image["name"],
           ThumbnailUrl = new Uri((string)image["thumbnail"], UriKind.Absolute),
           ImageUrl = new Uri((string)image["image"], UriKind.Absolute)
         });
@@ -106,6 +108,7 @@ namespace XiaohaiCurator.ViewModels
         JObject g = (JObject)stream[i];
         this.GirlsStream.Add(new GirlViewModel()
         {
+          Id = (string) g["id"],
           Name = (string)g["name"],
           ThumbnailUrl = new Uri((string)g["thumbnail"]),
           ImageUrl = new Uri((string)g["image"], UriKind.Absolute),
@@ -136,6 +139,7 @@ namespace XiaohaiCurator.ViewModels
           JObject item = (JObject)results[i];
           this.DailyGirls.Add(new GirlViewModel() 
           {
+            Id = (string) item["id"],
             Name = (string)item["name"],
             ThumbnailUrl = new Uri((string)item["thumbnail"]),
             ImageUrl = new Uri((string)item["image"], UriKind.Absolute),

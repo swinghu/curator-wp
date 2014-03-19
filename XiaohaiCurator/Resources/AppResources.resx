@@ -182,4 +182,16 @@
   <data name="SettingsPageLockScreenPeriodicalSwitchHeader" xml:space="preserve">
     <value>periodically update</value>
   </data>
+  <data name="PhotoViewerPageAppBarShare" xml:space="preserve">
+    <value>share</value>
+  </data>
+  <data name="SettingsPageGeneralHeader" xml:space="preserve">
+    <value>general</value>
+  </data>
+  <data name="SettingsPageShareLinkMessageDefault" xml:space="preserve">
+    <value>I would like to share you the pretty girl.</value>
+  </data>
+  <data name="SettingsPageShareLinkMessageTitle" xml:space="preserve">
+    <value>Share Link Message</value>
+  </data>
 </root>

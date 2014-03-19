@@ -38,7 +38,7 @@ namespace XiaohaiCurator
         switch (tab)
         {
           case "lockscreen":
-            MainPivot.SelectedIndex = 0;
+            MainPivot.SelectedIndex = 1;
             break;
           default:
             break;
@@ -62,6 +62,12 @@ namespace XiaohaiCurator
     {
       PeriodicalSwitch.Content = AppResources.SettingsPageLockScreenPeriodicalSwitchContentUnchecked;
       appSettings[Constant.SETTINGS_IS_PERIODICALLY_UPDATE] = false;
+      appSettings.Save();
+    }
+
+    private void ShareLinkMessage_TextChanged(object sender, TextChangedEventArgs e)
+    {
+      appSettings[Constant.SETTINGS_SHARE_LINK_MESSAGE] = ShareLinkMessage.Text;
       appSettings.Save();
     }
   }
