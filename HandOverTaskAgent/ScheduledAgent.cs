@@ -32,6 +32,7 @@ namespace HandOverTaskAgent
     {
       if (Debugger.IsAttached)
       {
+        Debug.WriteLine(e.ExceptionObject.Message);
         // 發生未處理的例外狀況; 切換到偵錯工具
         Debugger.Break();
       }
@@ -64,7 +65,12 @@ namespace HandOverTaskAgent
       {
         using (IsolatedStorageFile file = IsolatedStorageFile.GetUserStoreForApplication())
         {
-          bool isPeriodically = (bool) appSettings["IsPeriodicallyUpdate"];
+
+          bool isPeriodically = false;
+          if (appSettings.Contains("IsPeriodicallyUpdate"))
+          {
+            isPeriodically = (bool)appSettings["IsPeriodicallyUpdate"];
+          }
           if (isPeriodically)
           {
             if (file.FileExists(fileName))
