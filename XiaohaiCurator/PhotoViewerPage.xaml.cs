@@ -114,8 +114,7 @@ namespace XiaohaiCurator
       if (LockScreenManager.IsProvidedByCurrentApplication)
       {
         // retrieve the filename
-        string[] urlString = imageUrl.ToString().Split(new char[] { '/' });
-        var fileName = urlString[urlString.Length - 1];
+        var fileName = "lockscreen.jpg";
 
         // start to download the picture and save it
         var webClient = new WebClient();
@@ -139,7 +138,7 @@ namespace XiaohaiCurator
             fileStream.Close();
           }
 
-          LockScreen.SetImageUri(new Uri(string.Format("ms-appdata:///Local/{0}", fileName), UriKind.Absolute));
+          LockScreen.SetImageUri(new Uri("ms-appdata:///Local/lockscreen.jpg", UriKind.Absolute));
           MessageBox.Show(AppResources.SetLockScreenDoneText);
         };
         webClient.OpenReadAsync(imageUrl);

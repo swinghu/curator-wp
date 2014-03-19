@@ -10,6 +10,7 @@ using XiaohaiCurator.Resources;
 using XiaohaiCurator.ViewModels;
 using Microsoft.Phone.Shell;
 using System.Windows;
+using System.IO.IsolatedStorage;
 
 namespace XiaohaiCurator
 {
@@ -27,6 +28,8 @@ namespace XiaohaiCurator
 
     // layout button
     private ApplicationBarIconButton layoutButton;
+    // settings menu item
+    private ApplicationBarMenuItem settingsMenuItem;
 
     // pointer to current displayed list
     private LongListSelector focusedList;
@@ -102,7 +105,14 @@ namespace XiaohaiCurator
           }
         };
 
+      settingsMenuItem = new ApplicationBarMenuItem(AppResources.MainPageAppBarSettings);
+      settingsMenuItem.Click += (s, e) =>
+        {
+          NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+        };
+
       ApplicationBar.Buttons.Add(layoutButton);
+      ApplicationBar.MenuItems.Add(settingsMenuItem);
     }
 
     /// <summary>

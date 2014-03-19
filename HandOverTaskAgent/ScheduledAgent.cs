@@ -12,6 +12,8 @@ namespace HandOverTaskAgent
     private DateTime today;
     private string fileName;
     private Uri dailyImageUri;
+    private Uri defaultLockscreenUri;
+    private IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
 
     /// <remarks>
     /// ScheduledAgent 建構函式，會初始化 UnhandledException 處理常式
@@ -50,6 +52,8 @@ namespace HandOverTaskAgent
       fileName = string.Format("Daily-{0:0000}-{1:00}-{2:00}.jpg", today.Year, today.Month, today.Day);
       dailyImageUri = new Uri(string.Format("ms-appdata:///Local/{0}", fileName), UriKind.Absolute);
 
+      defaultLockscreenUri = new Uri("ms-appdata:///Local/lockscreen.jpg", UriKind.Absolute);
+
       ChangeLockscreenPicture();
       NotifyComplete();
     }
@@ -60,9 +64,20 @@ namespace HandOverTaskAgent
       {
         using (IsolatedStorageFile file = IsolatedStorageFile.GetUserStoreForApplication())
         {
-          if (file.FileExists(fileName))
+          bool isPeriodically = (bool) appSettings["IsPeriodicallyUpdate"];
+          if (isPeriodically)
           {
-            LockScreen.SetImageUri(dailyImageUri);
+            if (file.FileExists(fileName))
+            {
+              LockScreen.SetImageUri(dailyImageUri);
+            }
+          }
+          else
+          { 
+            if (file.FileExists("lockscreen.jpg"))
+            {
+              LockScreen.SetImageUri(defaultLockscreenUri);
+            }
           }
         }
       }

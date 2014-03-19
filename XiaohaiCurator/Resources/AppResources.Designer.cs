@@ -142,6 +142,15 @@ namespace XiaohaiCurator.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to settings....
+        /// </summary>
+        public static string MainPageAppBarSettings {
+            get {
+                return ResourceManager.GetString("MainPageAppBarSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
         public static string ResourceFlowDirection {
@@ -183,6 +192,60 @@ namespace XiaohaiCurator.Resources {
         public static string SetLockScreenDoneText {
             get {
                 return ResourceManager.GetString("SetLockScreenDoneText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to lock screen.
+        /// </summary>
+        public static string SettingsPageLockScreenHeader {
+            get {
+                return ResourceManager.GetString("SettingsPageLockScreenHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to lock screen settings.
+        /// </summary>
+        public static string SettingsPageLockScreenHint {
+            get {
+                return ResourceManager.GetString("SettingsPageLockScreenHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to yes.
+        /// </summary>
+        public static string SettingsPageLockScreenPeriodicalSwitchContentChecked {
+            get {
+                return ResourceManager.GetString("SettingsPageLockScreenPeriodicalSwitchContentChecked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to no.
+        /// </summary>
+        public static string SettingsPageLockScreenPeriodicalSwitchContentUnchecked {
+            get {
+                return ResourceManager.GetString("SettingsPageLockScreenPeriodicalSwitchContentUnchecked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to periodically update.
+        /// </summary>
+        public static string SettingsPageLockScreenPeriodicalSwitchHeader {
+            get {
+                return ResourceManager.GetString("SettingsPageLockScreenPeriodicalSwitchHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xiaohai Curator - Settings.
+        /// </summary>
+        public static string SettingsPageTitle {
+            get {
+                return ResourceManager.GetString("SettingsPageTitle", resourceCulture);
             }
         }
     }

@@ -161,4 +161,25 @@
   <data name="SetLockScreenDoneText" xml:space="preserve">
     <value>照片已設為鎖定畫面</value>
   </data>
+  <data name="SettingsPageTitle" xml:space="preserve">
+    <value>小海嚴選 - 設定畫面</value>
+  </data>
+  <data name="SettingsPageLockScreenHeader" xml:space="preserve">
+    <value>鎖定畫面</value>
+  </data>
+  <data name="MainPageAppBarSettings" xml:space="preserve">
+    <value>設定...</value>
+  </data>
+  <data name="SettingsPageLockScreenHint" xml:space="preserve">
+    <value>設定鎖定畫面</value>
+  </data>
+  <data name="SettingsPageLockScreenPeriodicalSwitchContentChecked" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="SettingsPageLockScreenPeriodicalSwitchContentUnchecked" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="SettingsPageLockScreenPeriodicalSwitchHeader" xml:space="preserve">
+    <value>每天自動更新</value>
+  </data>
 </root>

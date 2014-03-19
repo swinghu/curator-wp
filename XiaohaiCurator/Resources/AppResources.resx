@@ -161,4 +161,25 @@
   <data name="SetLockScreenDoneText" xml:space="preserve">
     <value>Picture is set to lockscreen.</value>
   </data>
+  <data name="SettingsPageTitle" xml:space="preserve">
+    <value>Xiaohai Curator - Settings</value>
+  </data>
+  <data name="SettingsPageLockScreenHeader" xml:space="preserve">
+    <value>lock screen</value>
+  </data>
+  <data name="MainPageAppBarSettings" xml:space="preserve">
+    <value>settings...</value>
+  </data>
+  <data name="SettingsPageLockScreenHint" xml:space="preserve">
+    <value>lock screen settings</value>
+  </data>
+  <data name="SettingsPageLockScreenPeriodicalSwitchContentChecked" xml:space="preserve">
+    <value>yes</value>
+  </data>
+  <data name="SettingsPageLockScreenPeriodicalSwitchContentUnchecked" xml:space="preserve">
+    <value>no</value>
+  </data>
+  <data name="SettingsPageLockScreenPeriodicalSwitchHeader" xml:space="preserve">
+    <value>periodically update</value>
+  </data>
 </root>
