@@ -194,4 +194,10 @@
   <data name="SettingsPageShareLinkMessageTitle" xml:space="preserve">
     <value>Share Link Message</value>
   </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>Cannot read content through Internet now! Please check the network status and try again later.</value>
+  </data>
+  <data name="NetworkErrorCaption" xml:space="preserve">
+    <value>Network error</value>
+  </data>
 </root>

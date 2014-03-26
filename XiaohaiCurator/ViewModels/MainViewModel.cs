@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using XiaohaiCurator.Resources;
 using Microsoft.Phone.Shell;
 using Newtonsoft.Json.Linq;
+using System.Windows;
 
 namespace XiaohaiCurator.ViewModels
 {
@@ -61,25 +62,33 @@ namespace XiaohaiCurator.ViewModels
 
       this.GirlOfToday.Clear();
 
-      var result = await DownloadStringAsync(
-        new Uri(string.Format("http://curator.im/api/girl_of_the_day/{0}/?token={1}&format=json", day, TOKEN)));
-
-      JArray images = JArray.Parse(result);
-      int count = images.Count;
-      
-      for (int i = 0; i < count; ++i )
+      string result;
+      try
       {
-        JObject image = (JObject)images[i];
+        result = await DownloadStringAsync(
+          new Uri(string.Format("http://curator.im/api/girl_of_the_day/{0}/?token={1}&format=json", day, TOKEN)));
 
-        this.GirlOfToday.Add(new GirlViewModel() 
-        { 
-          Id = (string) image["id"],
-          Name = (string) image["name"],
-          ThumbnailUrl = new Uri((string)image["thumbnail"], UriKind.Absolute),
-          ImageUrl = new Uri((string)image["image"], UriKind.Absolute)
-        });
+        JArray images = JArray.Parse(result);
+        int count = images.Count;
+
+        for (int i = 0; i < count; ++i)
+        {
+          JObject image = (JObject)images[i];
+
+          this.GirlOfToday.Add(new GirlViewModel()
+          {
+            Id = (string)image["id"],
+            Name = (string)image["name"],
+            ThumbnailUrl = new Uri((string)image["thumbnail"], UriKind.Absolute),
+            ImageUrl = new Uri((string)image["image"], UriKind.Absolute)
+          });
+        }
       }
-
+      catch (Exception ex)
+      {
+        MessageBox.Show(AppResources.NetworkError, AppResources.NetworkErrorCaption, MessageBoxButton.OK);
+        Debug.WriteLine(ex.Message);
+      }
       this.IsLoading = false;
     }
 
@@ -90,30 +99,39 @@ namespace XiaohaiCurator.ViewModels
     public async void LoadStream(int page)
     {
       this.IsLoading = true;
-      var result = await DownloadStringAsync(new Uri(String.Format("http://curator.im/api/stream/?token={0}&page={1}&format=json", TOKEN, page)));
-
-      JObject sResult = JObject.Parse(result);
-      string next = (string)sResult["next"];
-
-      if (next == null)
+      string result;
+      try
       {
-        this.IsStreamEnd = true;
-      }
+        result = await DownloadStringAsync(new Uri(String.Format("http://curator.im/api/stream/?token={0}&page={1}&format=json", TOKEN, page)));
 
-      JArray stream = (JArray)sResult["results"];
-      int count = stream.Count;
+        JObject sResult = JObject.Parse(result);
+        string next = (string)sResult["next"];
 
-      for (int i = 0; i < count; ++i)
-      {
-        JObject g = (JObject)stream[i];
-        this.GirlsStream.Add(new GirlViewModel()
+        if (next == null)
         {
-          Id = (string) g["id"],
-          Name = (string)g["name"],
-          ThumbnailUrl = new Uri((string)g["thumbnail"]),
-          ImageUrl = new Uri((string)g["image"], UriKind.Absolute),
-          DateAt = (string)g["date"]
-        });
+          this.IsStreamEnd = true;
+        }
+
+        JArray stream = (JArray)sResult["results"];
+        int count = stream.Count;
+
+        for (int i = 0; i < count; ++i)
+        {
+          JObject g = (JObject)stream[i];
+          this.GirlsStream.Add(new GirlViewModel()
+          {
+            Id = (string)g["id"],
+            Name = (string)g["name"],
+            ThumbnailUrl = new Uri((string)g["thumbnail"]),
+            ImageUrl = new Uri((string)g["image"], UriKind.Absolute),
+            DateAt = (string)g["date"]
+          });
+        }
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(AppResources.NetworkError, AppResources.NetworkErrorCaption, MessageBoxButton.OK);
+        Debug.WriteLine(ex.Message);
       }
       this.IsLoading = false;
     }
@@ -151,13 +169,13 @@ namespace XiaohaiCurator.ViewModels
         SaveImage((string)daily["image"], string.Format("Daily-{0}.jpg", (string)daily["date"]));
 
         ChangeLiveTiles((string)daily["name"], (string)daily["thumbnail"]);
-        this.IsLoading = false;
       }
       catch (Exception ex)
       {
+        MessageBox.Show(AppResources.NetworkError, AppResources.NetworkErrorCaption, MessageBoxButton.OK);
         Debug.WriteLine("Error: " + ex.Message);
       }
-
+      this.IsLoading = false;
       this.IsDataLoaded = true;
     }
 

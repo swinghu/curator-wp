@@ -41,6 +41,15 @@ namespace XiaohaiCurator
       
       ImageContainer.ManipulationCompleted += ImageContainer_ManipulationCompleted;
       ImageContainer.ImageOpened += ImageContainer_ImageOpened;
+      ImageContainer.ImageFailed += ImageContainer_ImageFailed;
+    }
+
+    /// <summary>
+    /// Handle if the image contain failed to load the image.
+    /// </summary>
+    void ImageContainer_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+    {
+      MessageBox.Show(AppResources.NetworkError, AppResources.NetworkErrorCaption, MessageBoxButton.OK);
     }
 
     /// <summary>

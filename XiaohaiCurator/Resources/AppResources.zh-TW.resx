@@ -194,4 +194,10 @@
   <data name="SettingsPageShareLinkMessageDefault" xml:space="preserve">
     <value>我覺得這個女生很漂亮，相信你也會喜歡！</value>
   </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>無法透過網路取得資料！請確認您的網路連線狀況並且稍候再試。</value>
+  </data>
+  <data name="NetworkErrorCaption" xml:space="preserve">
+    <value>讀取網路發生問題</value>
+  </data>
 </root>
