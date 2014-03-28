@@ -3,6 +3,10 @@
   <DefaultLanguage xmlns="" code="en-US" />
   <Languages xmlns="">
     <Language code="zh-TW" />
+    <Language code="zh-CN" />
+    <Language code="es-ES" />
+    <Language code="th-TH" />
+    <Language code="it-IT" />
   </Languages>
   <App xmlns="" ProductID="{0c72cf06-3508-4bd1-98ac-5441573747db}" Title="@AppResLib.dll,-100" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="XiaohaiCurator author" Description="Sample description" Publisher="XiaohaiCurator" PublisherID="{c0bcbfe4-be83-43c8-9c93-98448759c13e}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
@@ -31,9 +35,13 @@
           </BackBackgroundImageURI>
           <BackTitle>
           </BackTitle>
+          <LargeBackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileLarge.png</LargeBackgroundImageURI>
+          <LargeBackContent />
+          <LargeBackBackgroundImageURI IsRelative="true" IsResource="false">
+          </LargeBackBackgroundImageURI>
           <DeviceLockImageURI IsRelative="true" IsResource="false">
           </DeviceLockImageURI>
-          <HasLarge>false</HasLarge>
+          <HasLarge>True</HasLarge>
         </TemplateFlip>
       </PrimaryToken>
     </Tokens>
