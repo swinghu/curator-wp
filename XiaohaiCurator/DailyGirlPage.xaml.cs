@@ -20,6 +20,11 @@ namespace XiaohaiCurator
     {
       InitializeComponent();
 
+      if (!App.IsLowMemoryDevice)
+      {
+        TiltEffect.SetIsTiltEnabled(this, true);
+      }
+
       DataContext = App.ViewModel;
     }
 

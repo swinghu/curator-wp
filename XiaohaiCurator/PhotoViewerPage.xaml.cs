@@ -22,7 +22,7 @@ namespace XiaohaiCurator
     private int currentIndex;
     private IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
 
-    public Uri imageUrl { get; private set; }
+    public string imageUrl { get; private set; }
 
     // download/save button
     private ApplicationBarIconButton saveButton;
@@ -140,7 +140,7 @@ namespace XiaohaiCurator
           }
         }
       };
-      webClient.OpenReadAsync(imageUrl);
+      webClient.OpenReadAsync(new Uri(imageUrl, UriKind.Absolute));
       SystemTray.ProgressIndicator.IsVisible = true;
     }
 
@@ -157,7 +157,7 @@ namespace XiaohaiCurator
       if (LockScreenManager.IsProvidedByCurrentApplication)
       {
         // retrieve the filename
-        var fileName = "lockscreen.jpg";
+        var fileName = string.Format("lockscreen-{0}.jpg", DateTime.Now.Ticks);
 
         // start to download the picture and save it
         var webClient = new WebClient();
@@ -181,10 +181,10 @@ namespace XiaohaiCurator
             fileStream.Close();
           }
 
-          LockScreen.SetImageUri(new Uri("ms-appdata:///Local/lockscreen.jpg", UriKind.Absolute));
+          LockScreen.SetImageUri(new Uri("ms-appdata:///Local/" + fileName, UriKind.Absolute));
           MessageBox.Show(AppResources.SetLockScreenDoneText);
         };
-        webClient.OpenReadAsync(imageUrl);
+        webClient.OpenReadAsync(new Uri(imageUrl, UriKind.Absolute));
         SystemTray.ProgressIndicator.IsVisible = true;
       }
     }
@@ -234,7 +234,7 @@ namespace XiaohaiCurator
       SystemTray.ProgressIndicator.IsVisible = true;
       var item = collection[index];
       imageUrl = item.ImageUrl;
-      BitmapImage bitmap = new BitmapImage(item.ImageUrl);
+      BitmapImage bitmap = new BitmapImage(new Uri(item.ImageUrl, UriKind.Absolute));
       ImageContainer.Source = bitmap;
       currentIndex = index;
     }

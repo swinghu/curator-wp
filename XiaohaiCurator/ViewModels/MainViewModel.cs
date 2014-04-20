@@ -11,6 +11,7 @@ using XiaohaiCurator.Resources;
 using Microsoft.Phone.Shell;
 using Newtonsoft.Json.Linq;
 using System.Windows;
+using Microsoft.Phone.Info;
 
 namespace XiaohaiCurator.ViewModels
 {
@@ -79,10 +80,11 @@ namespace XiaohaiCurator.ViewModels
           {
             Id = (string)image["id"],
             Name = (string)image["name"],
-            ThumbnailUrl = new Uri((string)image["thumbnail"], UriKind.Absolute),
-            ImageUrl = new Uri((string)image["image"], UriKind.Absolute)
+            ThumbnailUrl = (string)image["thumbnail"],
+            ImageUrl = (string)image["image"]
           });
         }
+        images = null;
       }
       catch (Exception ex)
       {
@@ -122,11 +124,13 @@ namespace XiaohaiCurator.ViewModels
           {
             Id = (string)g["id"],
             Name = (string)g["name"],
-            ThumbnailUrl = new Uri((string)g["thumbnail"]),
-            ImageUrl = new Uri((string)g["image"], UriKind.Absolute),
+            ThumbnailUrl = (string)g["thumbnail"],
+            ImageUrl = (string)g["image"],
             DateAt = (string)g["date"]
           });
         }
+
+        stream = null;
       }
       catch (Exception ex)
       {
@@ -159,8 +163,8 @@ namespace XiaohaiCurator.ViewModels
           {
             Id = (string) item["id"],
             Name = (string)item["name"],
-            ThumbnailUrl = new Uri((string)item["thumbnail"]),
-            ImageUrl = new Uri((string)item["image"], UriKind.Absolute),
+            ThumbnailUrl = (string)item["thumbnail"],
+            ImageUrl = (string)item["image"],
             DateAt = (string)item["date"]
           });
         }

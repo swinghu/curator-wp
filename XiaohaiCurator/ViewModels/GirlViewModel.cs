@@ -1,5 +1,5 @@
-﻿
-using System;
+﻿using System;
+
 namespace XiaohaiCurator.ViewModels
 {
   public class GirlViewModel : BaseViewModel
@@ -41,11 +41,11 @@ namespace XiaohaiCurator.ViewModels
       }
     }
 
-    private Uri _thumbnailUrl;
+    private string _thumbnailUrl;
     /// <summary>
     /// 
     /// </summary>
-    public Uri ThumbnailUrl
+    public string ThumbnailUrl
     {
       get 
       { 
@@ -61,8 +61,8 @@ namespace XiaohaiCurator.ViewModels
       }
     }
 
-    private Uri _imageUrl;
-    public Uri ImageUrl
+    private string _imageUrl;
+    public string ImageUrl
     {
       get
       {

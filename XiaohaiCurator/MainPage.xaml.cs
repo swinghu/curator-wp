@@ -11,6 +11,7 @@ using XiaohaiCurator.ViewModels;
 using Microsoft.Phone.Shell;
 using System.Windows;
 using System.IO.IsolatedStorage;
+using Microsoft.Phone.Info;
 
 namespace XiaohaiCurator
 {
@@ -38,6 +39,11 @@ namespace XiaohaiCurator
     public MainPage()
     {
       InitializeComponent();
+
+      if (!App.IsLowMemoryDevice)
+      {
+        TiltEffect.SetIsTiltEnabled(this, true);
+      }
 
       // try to start the background agent.
       StartPeriodicAgent();
@@ -197,6 +203,8 @@ namespace XiaohaiCurator
         {
           App.ViewModel.LoadStream(++page);
           isStreamLoaded = true;
+          Debug.WriteLine(DeviceStatus.ApplicationCurrentMemoryUsage + " / " + DeviceStatus.ApplicationMemoryUsageLimit);
+
         }
       }
     }

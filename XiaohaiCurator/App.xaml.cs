@@ -12,12 +12,15 @@ using XiaohaiCurator.Resources;
 using XiaohaiCurator.ViewModels;
 using Windows.ApplicationModel;
 using Windows.Phone.Speech.VoiceCommands;
+using Microsoft.Phone.Info;
 
 namespace XiaohaiCurator
 {
   public partial class App : Application
   {
     private static MainViewModel viewModel = null;
+
+    public static bool IsLowMemoryDevice;
 
     /// <summary>
     /// A static ViewModel used by the views to bind against.
@@ -143,9 +146,29 @@ namespace XiaohaiCurator
       if (phoneApplicationInitialized)
         return;
 
+      try
+      {
+        long result = (long)DeviceExtendedProperties.GetValue("ApplicationWorkingSetLimit");
+        IsLowMemoryDevice = result < 188743680L;
+      }
+      catch (ArgumentOutOfRangeException)
+      {
+        IsLowMemoryDevice = true;
+      }
+
+      Debug.WriteLine(IsLowMemoryDevice);
+
+
       // Create the frame but don't set it as RootVisual yet; this allows the splash
       // screen to remain active until the application is ready to render.
-      RootFrame = new TransitionFrame();
+      if (IsLowMemoryDevice)
+      {
+        RootFrame = new PhoneApplicationFrame();
+      }
+      else
+      {
+        RootFrame = new TransitionFrame();
+      }
       RootFrame.Navigated += CompleteInitializePhoneApplication;
 
       // Handle navigation failures

@@ -13,8 +13,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="PortraitOrLandscape"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True"
-    toolkit:TiltEffect.IsTiltEnabled="True">
+    shell:SystemTray.IsVisible="True">
 
   <shell:SystemTray.ProgressIndicator>
     <shell:ProgressIndicator IsIndeterminate="{Binding IsLoading}" IsVisible="{Binding IsLoading}"
@@ -24,8 +23,8 @@
   <phone:PhoneApplicationPage.Resources>
     <!-- Tiled images list template. -->
     <DataTemplate x:Key="TiledImagesTemplate">
-      <StackPanel Height="144" Width="144" Margin="6, 6">
-        <Image Width="144" Height="144" Stretch="UniformToFill" CacheMode="BitMapCache">
+      <StackPanel Height="218" Width="218" Margin="6, 6">
+        <Image Width="218" Height="218" Stretch="UniformToFill" CacheMode="BitMapCache">
           <Image.Source>
             <BitmapImage UriSource="{Binding ThumbnailUrl}" CreateOptions="BackgroundCreation" />
           </Image.Source>
@@ -84,7 +83,7 @@
                                 ItemsSource="{Binding DailyGirls}"
                                 ItemTemplate="{StaticResource TiledImagesTemplate}"
                                 LayoutMode="Grid"
-                                GridCellSize="144, 144"
+                                GridCellSize="218, 218"
                                 SelectionChanged="DailyGirlsList_SelectionChanged"/>
 
       </phone:PivotItem>
@@ -93,7 +92,7 @@
         <phone:LongListSelector x:Name="GirlsStreamList" Margin="6, -6, 0, 0" 
                                 ItemsSource="{Binding GirlsStream}" 
                                 LayoutMode="Grid"
-                                GridCellSize="144, 144"
+                                GridCellSize="218, 218"
                                 SelectionChanged="GirlsStreamList_SelectionChanged"
                                 ItemTemplate="{StaticResource TiledImagesTemplate}" />
 
