@@ -76,6 +76,7 @@
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <phone:Pivot x:Name="MainPivot" 
                  Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
+                 LoadedPivotItem="MainPivot_LoadedPivotItem"
                  SelectionChanged="Pivot_SelectionChanged">
       
       <phone:PivotItem Header="{Binding Path=LocalizedResources.DailyGirlTitle, Source={StaticResource LocalizedStrings}}">

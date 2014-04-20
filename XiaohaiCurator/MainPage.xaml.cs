@@ -242,5 +242,31 @@ namespace XiaohaiCurator
         DailyGirlsList.SelectedItem = null;
       }
     }
+
+    private void MainPivot_LoadedPivotItem(object sender, PivotItemEventArgs e)
+    {
+      var loadItem = e.Item;
+      if (loadItem == null)
+      {
+        return;
+      }
+      ClearItem(loadItem);
+    }
+
+    private void ClearItem(PivotItem pivotItem)
+    {
+      foreach (var item in MainPivot.Items)
+      {
+        var pi = item as PivotItem;
+        if (pi != pivotItem)
+        {
+          (pi.Content as UIElement).Visibility = Visibility.Collapsed;
+        }
+        else
+        {
+          (pi.Content as UIElement).Visibility = Visibility.Visible;
+        }
+      }
+    }
   }
 }
